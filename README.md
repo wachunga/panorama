@@ -1,4 +1,5 @@
 # panorama
+[![Build Status](https://travis-ci.org/wachunga/panorama.svg?branch=master)](https://travis-ci.org/wachunga/panorama)
 
 Modern, modular projects tend to involve lots of repositories. Keeping an eye on them can be difficult.
 
