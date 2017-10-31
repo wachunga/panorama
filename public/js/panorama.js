@@ -9,6 +9,7 @@ const colors = require('./colors');
 const PushEvent = require('./event/pushEvent');
 const BranchEvent = require('./event/branchEvent');
 const CommentEvent = require('./event/commentEvent');
+const PullRequestEvent = require('./event/pullRequestEvent');
 const TagEvent = require('./event/tagEvent');
 
 function Panorama(organizations) {
@@ -288,6 +289,8 @@ function fetchPushes(viewModel) {
 				pushes.push(new PushEvent(event));
 			} else if (event.type === 'CommitCommentEvent') {
 				pushes.push(new CommentEvent(event));
+			} else if (event.type === 'PullRequestEvent') {
+				pushes.push(new PullRequestEvent(event));
 			} else if (event.type === 'CreateEvent') {
 				if (event.payload.ref_type === 'tag') {
 					pushes.push(new TagEvent(event));
@@ -297,7 +300,10 @@ function fetchPushes(viewModel) {
 					console.log(event);
 				}
 			} else {
-				// console.log(event.type)
+				console.log(event.type)
+				if (event.type === 'PullRequestEvent') {
+					console.log(event)
+				}
 			}
 		})
 

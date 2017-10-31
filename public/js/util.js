@@ -6,9 +6,6 @@ function makeTooltip(options = {}) {
 		text += ' on ' + this.branch;
 	}
 	text += ' by ' + this.user.login + '\n';
-	if (options.repo) {
-		text += this.repo + '\n';
-	}
 	return text + this.message();
 }
 
