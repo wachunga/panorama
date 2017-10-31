@@ -278,35 +278,7 @@ function fetchPushes(viewModel) {
 		url: url,
 		type: 'json'
 	}).then(function (response) {
-		var seen = {};
-
-		var pushes = [];
-		_.each(response, function (event) {
-			if (!seen[event.type]) {
-				seen[event.type] = true;
-			}
-			if (event.type === 'PushEvent') {
-				pushes.push(new PushEvent(event));
-			} else if (event.type === 'CommitCommentEvent') {
-				pushes.push(new CommentEvent(event));
-			} else if (event.type === 'PullRequestEvent') {
-				pushes.push(new PullRequestEvent(event));
-			} else if (event.type === 'CreateEvent') {
-				if (event.payload.ref_type === 'tag') {
-					pushes.push(new TagEvent(event));
-				} else if (event.payload.ref_type === 'branch') {
-					pushes.push(new BranchEvent(event));
-				} else {
-					console.log(event);
-				}
-			} else {
-				console.log(event.type)
-				if (event.type === 'PullRequestEvent') {
-					console.log(event)
-				}
-			}
-		})
-
+		var pushes = response.map(processGithubEvent).filter(Boolean);
 		viewModel.pushes(pushes);
 		viewModel.loading(false);
 	}).fail(function (err) {
@@ -314,6 +286,28 @@ function fetchPushes(viewModel) {
 		viewModel.loading(false);
 		viewModel.error('couldn\'t fetch fetch activity for ' + (org.login || 'unknown'));
 	});
+}
+
+function processGithubEvent(event) {
+	// see https://developer.github.com/v3/activity/events/types/
+	if (event.type === 'PushEvent') {
+		return new PushEvent(event);
+	} else if (event.type === 'CommitCommentEvent') {
+		return new CommentEvent(event);
+	} else if (event.type === 'PullRequestEvent') {
+		return new PullRequestEvent(event);
+	} else if (event.type === 'CreateEvent') {
+		if (event.payload.ref_type === 'tag') {
+			return new TagEvent(event);
+		} else if (event.payload.ref_type === 'branch') {
+			return new BranchEvent(event);
+		}
+		// repository create - do nothing
+	} else {
+		// IssueCommentEvent - too noisy (automated CI)
+		// PullRequestReviewCommentEvent - better to view these on the PR page
+		// console.log(event.type)
+	}
 }
 
 function compressPushes(pushes) {
