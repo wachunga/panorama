@@ -12,7 +12,9 @@ module.exports = {
 	},
 	externals: {
 		moment: 'moment',
-		_: 'underscore',
-		SVG: 'SVG'
+		'underscore': '_',
+		SVG: 'SVG',
+		knockout: 'ko',
+		reqwest: 'reqwest'
 	}
 };

@@ -1,8 +1,9 @@
-/* global ko, reqwest */
 'use strict';
 
 const _ = require('underscore');
 const moment = require('moment');
+const ko = require('knockout');
+const reqwest = require('reqwest');
 
 const svg = require('./svg');
 const colors = require('./colors');
