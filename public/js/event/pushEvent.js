@@ -53,7 +53,7 @@ PushEvent.prototype.combine = function (push) {
 };
 
 PushEvent.prototype.icon = function () {
-	return this.branch && this.branch !== 'master' && 'octicon-git-branch';
+	return { 'octicon-git-commit': true, 'push__icon--push': true };
 };
 
 module.exports = PushEvent;

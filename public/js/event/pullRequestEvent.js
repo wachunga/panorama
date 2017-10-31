@@ -39,7 +39,10 @@ PullRequestEvent.prototype.combine = function () {
 };
 
 PullRequestEvent.prototype.icon = function () {
-	return 'octicon-git-pull-request';
+	if (this.event.payload.action === 'closed') {
+		return { 'octicon-check': true, 'push__icon--pull-request': true };
+	}
+	return { 'octicon-git-pull-request': true, 'push__icon--pull-request': true };
 };
 
 module.exports = PullRequestEvent;

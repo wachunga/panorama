@@ -178,17 +178,26 @@ body > svg:last-child {
 	font-size: 11px;
 	bottom: 0;
 }
-.branch {
-	background: orangered;
-	right: 0;
-	border-radius: 45% 0;
-	width: 40%;
-}
-.commit-count {
+.push__count {
 	background: #39aaff;
 	left: 0;
 	border-radius: 0 40%;
 	width: 40%;
+}
+.push__icon {
+	background: black;
+	right: 0;
+	border-radius: 45% 0;
+	width: 40%;
+}
+.push__icon--pull-request {
+	background: darkviolet;
+}
+.push__icon--branch {
+	background: orangered;
+}
+.push__icon--push {
+	background: coral;
 }
 
 

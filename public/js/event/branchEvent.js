@@ -36,7 +36,7 @@ BranchEvent.prototype.combine = function () {
 };
 
 BranchEvent.prototype.icon = function () {
-	return 'octicon-git-branch';
+	return { 'octicon-git-branch': true, 'push__icon--branch': true };
 };
 
 module.exports = BranchEvent;
