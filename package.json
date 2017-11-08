@@ -1,12 +1,15 @@
 {
   "name": "panorama",
-  "version": "0.5.2",
+  "version": "1.0.0",
   "description": "review changes across multiple repositories",
   "main": "app.js",
+  "engines": {
+    "node": ">=4.5.0"
+  },
   "scripts": {
     "lint": "eslint .",
     "test": "npm run lint",
-    "build": "webpack -p",
+    "build": "webpack",
     "watch": "webpack -w"
   },
   "repository": {
@@ -26,7 +29,7 @@
   "license": "MIT",
   "dependencies": {
     "async": "^0.9.0",
-    "ejs": "~0.8.5",
+    "ejs": "2.5.7",
     "ejs-locals": "^1.0.2",
     "everyauth": "~0.4.5",
     "express": "^3.19.0",

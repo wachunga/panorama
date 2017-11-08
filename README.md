@@ -1,23 +1,20 @@
 # panorama
 [![Build Status](https://travis-ci.org/wachunga/panorama.svg?branch=master)](https://travis-ci.org/wachunga/panorama)
 
-Modern, modular projects tend to involve lots of repositories. Keeping an eye on them can be difficult.
+Modern, modular software often involves lots of repositories. Keeping an eye on them can be difficult.
 
 Here's how Panorama helps:
 - reviewing commits* from everyone in your organization
 - visualizing cross-repository changes
-- the build broke, but which dependency changed?
+- the build broke, but which shared dependency changed?
 
-\* Panorama also shows comments, wiki changes, ...
+\* Panorama also shows comments, pull requests, ...
 
 ## See it in action
 
 ![Panorama screenshot](https://cloud.githubusercontent.com/assets/438545/10493836/1c48a958-7268-11e5-9e92-7099e76f2052.png)
 
-
-
-http://panorama.pulseenergy.com
-
+https://panorama.now.sh
 
 ## Development
 
