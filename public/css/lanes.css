@@ -4,7 +4,9 @@
 
 .content-lanes .outer-lane-wrapper {
 	margin: 0 auto;
-	display: table;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 
 .content-lanes .inner-lane-wrapper {
@@ -32,6 +34,13 @@ body > svg:last-child {
 
 .content-lanes .repo-headings {
 	display: flex;
+	justify-content: center;
+	position: sticky;
+	top: 0;
+	min-width: 100%;
+	z-index: 50;
+	background: #f7f9fc;
+	box-shadow: 0 6px 6px -3px rgba(50,50,50, 0.2);
 }
 .content-lanes .lane-time,
 .repo-headings .repo-heading:first-child {
@@ -48,10 +57,10 @@ body > svg:last-child {
 	white-space: nowrap;
 	cursor: pointer;
 	line-height: 0;
-	margin: 150px 0 0;
+	margin: 130px 0 0;
 	position: relative;
 	left: 50%;
-	bottom: 5px;
+	bottom: 15px;
 }
 
 .content-lanes .push + .push {
@@ -199,7 +208,6 @@ body > svg:last-child {
 .push__icon--push {
 	background: coral;
 }
-
 
 [data-hint]:after {
 	white-space: pre;

@@ -85,6 +85,9 @@ function drawLanes(underlay) {
 
 	var rowLabels = document.querySelectorAll('.lane-time .push span');
 	rows.forEach(function (row, bucket) {
+		if (bucket === 0) {
+			return;
+		}
 		var context = underlay.path(smooth(points(row, -1).map(function (p) {
 			p.ymin += 1;
 			return p;

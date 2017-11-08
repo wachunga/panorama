@@ -21,7 +21,6 @@ function Panorama(organizations) {
 	this.error = ko.observable();
 	this.pushes = ko.observableArray();
 	this.filter = ko.observable();
-	this.laneLabelVisible = ko.observable(false);
 
 	this.organizationInput = ko.computed({
 		read: function () {
@@ -117,7 +116,7 @@ function Panorama(organizations) {
 				}
 			}
 
-			_.each(pushes, function (push) {
+			pushes.forEach(function (push) {
 				push.bucket = bucketer(push.date);
 			});
 
@@ -129,11 +128,11 @@ function Panorama(organizations) {
 	this.bucketLabels = ko.computed({
 		read: function () {
 			var labels = _.pluck(this.buckets(), 'label');
-			labels.unshift('now');
+			labels.unshift('');
 			labels.pop();
 
 			var seenLabel = {};
-			return _.map(labels, function (label) {
+			return labels.map(function (label) {
 				var firstSeen = !seenLabel[label];
 				seenLabel[label] = true;
 				return {
@@ -150,7 +149,7 @@ function Panorama(organizations) {
 			var buckets = this.buckets();
 			var repos = this.repos();
 
-			return _.map(repos, function (repo) {
+			return repos.map(function (repo) {
 				var result = [];
 				while (result.length < buckets.length) {
 					result.push({
@@ -229,13 +228,6 @@ Panorama.prototype.init = function () {
 	this.applyWindowLocation();
 	window.onpopstate = this.applyWindowLocation.bind(this);
 
-	var lanes = document.querySelectorAll('.inner-lane-wrapper')[0];
-	window.onscroll = function () {
-		//console.log('window scrolled', lanes[0].getBoundingClientRect().top);
-		var showLabel = lanes && lanes.getBoundingClientRect().top <= 0;
-		this.laneLabelVisible(showLabel);
-	}.bind(this);
-
 	fetchPushes(this);
 	this.organization.subscribe(fetchPushes.bind(null, this));
 
@@ -275,6 +267,7 @@ function fetchPushes(viewModel) {
 	var org = viewModel.organization();
 	var url = org == null ? './a/user/events' : './a/organization/' + org.login + '/events';
 
+	// TODO: ditch request and just use fetch
 	reqwest({
 		url: url,
 		type: 'json'
@@ -313,7 +306,7 @@ function processGithubEvent(event) {
 
 function compressPushes(pushes) {
 	var compressed = [];
-	_.each(pushes, function (push) {
+	pushes.forEach(function (push) {
 		var last = _.last(compressed);
 		var together = last && last.combine(push);
 		if (together) {
